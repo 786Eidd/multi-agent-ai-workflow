@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1, "ticker": "BRLX", "note": "Clean case — strong positive news, healthy margin.",
+    "ground_truth": {"profit_margin_pct": 11.4, "sentiment_label": "positive", "verification_passed": true, "min_warnings": 0}
+  },
+  {
+    "id": 2, "ticker": "CDRG", "note": "Mixed news (2 positive-ish, 1 negative) — close to the sentiment threshold.",
+    "ground_truth": {"profit_margin_pct": 5.49, "sentiment_label": "positive", "verification_passed": true, "min_warnings": 0}
+  },
+  {
+    "id": 3, "ticker": "MRDN", "note": "Clean case — strong positive news, healthy margin.",
+    "ground_truth": {"profit_margin_pct": 16.21, "sentiment_label": "positive", "verification_passed": true, "min_warnings": 0}
+  },
+  {
+    "id": 4, "ticker": "GRVP", "note": "Legitimate negative margin (a real loss, not a data error) with negative news — should pass verification.",
+    "ground_truth": {"profit_margin_pct": -3.58, "sentiment_label": "negative", "verification_passed": true, "min_warnings": 0}
+  },
+  {
+    "id": 5, "ticker": "SBFH", "note": "Clean case, positive-leaning mixed news.",
+    "ground_truth": {"profit_margin_pct": 5.37, "sentiment_label": "positive", "verification_passed": true, "min_warnings": 0}
+  },
+  {
+    "id": 6, "ticker": "ANPT", "note": "Only 1 headline available — should pass verification but with a sparse-coverage warning.",
+    "ground_truth": {"profit_margin_pct": 9.27, "sentiment_label": "positive", "verification_passed": true, "min_warnings": 1}
+  },
+  {
+    "id": 7, "ticker": "TDLN", "note": "Negative-leaning mixed news, legitimate small positive margin.",
+    "ground_truth": {"profit_margin_pct": 4.18, "sentiment_label": "negative", "verification_passed": true, "min_warnings": 0}
+  },
+  {
+    "id": 8, "ticker": "WLTR", "note": "Deliberately impossible data (net profit > revenue) — verification MUST fail, not auto-finalize.",
+    "ground_truth": {"profit_margin_pct": 112.73, "sentiment_label": "negative", "verification_passed": false, "min_warnings": 0}
+  },
+  {
+    "id": 9, "ticker": "ZZZZ", "note": "Ticker not in the mock data source — research should fail, retry once, then still fail and require a human decision.",
+    "ground_truth": {"verification_passed": false, "expected_research_attempts": 2, "company_data_missing": true}
+  },
+  {
+    "id": 10, "ticker": "QQPP", "note": "A second unknown-ticker case (distinct thread) — same expected behavior as case 9.",
+    "ground_truth": {"verification_passed": false, "expected_research_attempts": 2, "company_data_missing": true}
+  },
+  {
+    "id": 11, "ticker": "123", "note": "Malformed ticker (not alphabetic) — the Orchestrator Agent should reject it before any agent runs, and it should never reach the human-approval interrupt.",
+    "ground_truth": {"rejected_before_agents": true}
+  }
+]
